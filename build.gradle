@@ -28,7 +28,6 @@ dependencies {
     compile group: "org.slf4j", name: "slf4j-api", version: "$slf4jApiVersion"
     compile group: "org.slf4j", name: "slf4j-log4j12", version: "$slf4jApiVersion"
     compile group: 'com.google.guava', name: 'guava', version: "$guavaVersion"
-    compile "com.google.code.gson:gson:$gsonVersion"
 
     testCompile "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
     testCompile "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
