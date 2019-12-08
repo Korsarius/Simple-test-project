@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import ua.nure.authentication.AuthenticationException;
 import ua.nure.authentication.LoginCredentials;
-import ua.nure.authentication.LoginService;
+import ua.nure.authentication.AuthService;
 import ua.nure.entity.Role;
 import ua.nure.entity.User;
 import ua.nure.repository.TokenRepository;
@@ -20,19 +20,19 @@ import ua.nure.securityservice.Token;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class LoginServiceStubTest {
+public class AuthServiceStubTest {
 
-    private final LoginService loginService;
+    private final AuthService authService;
     private final SecurityService securityService;
     private final Collection<Token> tokens = new ArrayList<>();
     private final Collection<User> users = new ArrayList<>();
     private Token token;
     private User user;
 
-    public LoginServiceStubTest() {
+    public AuthServiceStubTest() {
         TokenRepository tokenRepositoryStub = new TokenRepositoryStub();
         securityService = new SecurityService(tokenRepositoryStub);
-        loginService = new LoginService(new UserRepositoryStub(), tokenRepositoryStub, new SecurityService(tokenRepositoryStub));
+        authService = new AuthService(new UserRepositoryStub(), tokenRepositoryStub, new SecurityService(tokenRepositoryStub));
     }
 
     @BeforeEach
@@ -54,7 +54,7 @@ public class LoginServiceStubTest {
                 .withLogin("testLogin")
                 .withPassword("testPassword")
                 .build();
-        SecurityToken securityToken = loginService.login(loginCredentials);
+        SecurityToken securityToken = authService.login(loginCredentials);
         token.setSecurityToken(securityService.MD5Generator(token.securityToken()));
 
         Assertions.assertEquals(token.securityToken(), securityToken.securityToken(),
@@ -71,7 +71,7 @@ public class LoginServiceStubTest {
 
         Assertions.assertThrows(AuthenticationException.class,
                 () -> {
-                    loginService.login(loginUserWithInvalidPassword);
+                    authService.login(loginUserWithInvalidPassword);
                 }, failMessage);
 
         LoginCredentials loginUserWithNonExistentLogin = new LoginCredentials.Builder()
@@ -81,7 +81,7 @@ public class LoginServiceStubTest {
 
         Assertions.assertThrows(AuthenticationException.class,
                 () -> {
-                    loginService.login(loginUserWithNonExistentLogin);
+                    authService.login(loginUserWithNonExistentLogin);
                 }, failMessage);
     }
 

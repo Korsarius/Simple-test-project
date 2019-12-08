@@ -3,7 +3,7 @@ package ua.nure.authentication;
 /**
  * Stands for login user DTO, that contains user login and password.
  * It its obtained during user authorization and comes as a parameter to
- * {@link LoginService#login(LoginCredentials)}.
+ * {@link AuthService#login(LoginCredentials)}.
  */
 public class LoginCredentials {
 

@@ -11,14 +11,14 @@ import ua.nure.securityservice.SecurityToken;
  * This class represents a service layer to handle all business logic related to user log in.
  * If user exists, returns its security token.
  */
-public class LoginService {
+public class AuthService {
 
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final SecurityService securityService;
 
-    public LoginService(UserRepository userRepository, TokenRepository tokenRepository,
-                        SecurityService securityService) {
+    public AuthService(UserRepository userRepository, TokenRepository tokenRepository,
+                       SecurityService securityService) {
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.securityService = securityService;
